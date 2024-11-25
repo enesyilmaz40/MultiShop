@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using MultiShop.Order.Application.Features.CQRS.Commands.AddressCommands;
 using MultiShop.Order.Application.Features.CQRS.Handlers.AddressHandlers;
 using MultiShop.Order.Application.Features.CQRS.Queries.AddressQueries;
+using System.Runtime.CompilerServices;
 
 namespace MultiShop.Order.WebApi.Controllers
 {
@@ -26,20 +27,20 @@ namespace MultiShop.Order.WebApi.Controllers
         [HttpGet]
         public async Task<IActionResult> AddressList()
         {
-            var values = _getAddressQueryHandler.Handle();
+            var values = await _getAddressQueryHandler.Handle();
             return Ok(values);
 
         }
         [HttpGet("{id}")]
-        public async Task<IActionResult> AddressListById(int id)
+        public async Task<IActionResult> GetAddressById(int id)
         {
-            var values = _getAddressByIdQueryHandler.Handle(new GetAddressByIdQuery(id));
+            var values = await _getAddressByIdQueryHandler.Handle(new GetAddressByIdQuery(id));
             return Ok(values);
         }
         [HttpPost]
         public async Task<IActionResult> CreateAddress(CreateAddressCommand command)
         {
-            var values = _createAddressCommandHandler.Handle(command);
+            var values =  _createAddressCommandHandler.Handle(command);
             return Ok("Adres Bilgisi Başarıyla Eklendi");
         }
         [HttpPut]
