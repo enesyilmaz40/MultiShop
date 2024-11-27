@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿
+using Microsoft.EntityFrameworkCore;
 using MultiShop.IdentityServer;
 using MultiShop.IdentityServer.Data;
 using Serilog;
@@ -16,6 +17,8 @@ try
 
     builder.Services.AddControllers(); // API controller'ları için
     builder.Services.AddEndpointsApiExplorer();
+
+    builder.Services.AddLocalApiAuthentication();
 
 
     builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -55,3 +58,4 @@ finally
     Log.Information("Shut down complete");
     Log.CloseAndFlush();
 }
+
