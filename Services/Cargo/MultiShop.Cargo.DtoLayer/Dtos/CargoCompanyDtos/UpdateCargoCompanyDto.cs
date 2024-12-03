@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MultiShop.Business.EntityLayer.Concrete
+namespace MultiShop.Cargo.DtoLayer.Dtos.CargoCompanyDtos
 {
-    public class CargoCompany
+    public class UpdateCargoCompanyDto
     {
-        [Key]
         public int CargoCompanyId { get; set; }
         public string CargoCompanyName { get; set; }
     }
