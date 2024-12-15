@@ -1,4 +1,4 @@
-﻿namespace MultiShop.Catalog.Dtos.SpecialOfferDtos
+﻿namespace MultiShop.DtoLayer.CatalogDtos.SpecialOfferDtos
 {
     public class ResultSpecialOfferDto
     {
