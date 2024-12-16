@@ -18,13 +18,10 @@
         <!-- Left side column. contains the logo and sidebar -->
         @await Component.InvokeAsync("_AdminLayoutSideBarComponentPartial")
 
-
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
             @await Component.InvokeAsync("_AdminLayoutMainSectionViewBagComponentPartial")
-         
-
             <!-- Main content -->
          @RenderBody()
             <!-- content -->

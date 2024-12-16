@@ -1,5 +1,5 @@
 ﻿
-    namespace MultiShop.DtoLayer.CatalogDtos.ProductImageDtos
+namespace MultiShop.DtoLayer.CatalogDtos.ProductImageDtos
 {
     public class CreateProductImageDto
     {
