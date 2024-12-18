@@ -9,7 +9,8 @@ using static Duende.IdentityServer.IdentityServerConstants;
 namespace MultiShop.IdentityServer.Controllers
 {
     //PolicyName ile mutlaka AccessToken'a sahip olmalı
-    [Authorize(LocalApi.PolicyName)]
+    //[Authorize(LocalApi.PolicyName)]
+    [AllowAnonymous]
     [Route("api/[controller]")]
     [ApiController]
     public class RegistersController : ControllerBase
