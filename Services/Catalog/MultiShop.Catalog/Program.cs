@@ -19,7 +19,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
+ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
 {
     //openidyi çaðýracak ye
     opt.Authority = builder.Configuration["IdentityServerUrl"];

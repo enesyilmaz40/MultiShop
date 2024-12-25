@@ -24,9 +24,25 @@ public static class Config
         {
             Scopes={"CargoFullPermission"}
         },
-           new ApiResource("ResourceBasket")
+        new ApiResource("ResourceBasket")
         {
             Scopes={"BasketFullPermission"}
+        },
+        new ApiResource("ResourceOcelot")
+        {
+            Scopes={"OcelotFullPermission"}
+        },
+        new ApiResource("ResourceComment")
+        {
+            Scopes={"CommentFullPermission"}
+        },
+        new ApiResource("ResourcePayment")
+        {
+            Scopes={ "PaymentFullPermission" }
+        },
+          new ApiResource("ResourceImage")
+        {
+            Scopes={ "ImageFullPermission" }
         },
         new ApiResource(IdentityServerConstants.LocalApi.ScopeName)
     };
@@ -45,6 +61,10 @@ public static class Config
         new ApiScope("OrderFullPermission","Full authority for order operations"),
         new ApiScope("CargoFullPermission","Full authority for cargo operations"),
         new ApiScope("BasketFullPermission","Full authority for basket operations"),
+        new ApiScope("OcelotFullPermission","Full authority for ocelot operations"),
+        new ApiScope("CommentFullPermission","Full authority for comment operations"),
+        new ApiScope("PaymentFullPermission","Full authority for payment operations"),
+        new ApiScope("ImageFullPermission","Full authority for images operations"),
         new ApiScope(IdentityServerConstants.LocalApi.ScopeName)
     };
     public static IEnumerable<Client> Clients => new Client[] {
@@ -57,7 +77,7 @@ public static class Config
             ClientName="Multi Shop Visitor User",
             AllowedGrantTypes=GrantTypes.ClientCredentials,
             ClientSecrets={new Secret("multishopsecret".Sha256())},
-            AllowedScopes ={  "CatalogReadPermission" }
+            AllowedScopes ={  "CatalogReadPermission", "CargoFullPermission", "OcelotFullPermission", "CommentFullPermission", "ImageFullPermission" }
         },
 
         //Manager
@@ -67,7 +87,11 @@ public static class Config
             ClientName="Multi Shop Manager User",
             AllowedGrantTypes=GrantTypes.ResourceOwnerPassword,
             ClientSecrets={new Secret("multishopsecret".Sha256())},
-            AllowedScopes={ "CatalogFullPermission", "CatalogReadPermission", "BasketFullPermission" }
+            AllowedScopes={ "CatalogFullPermission", "CatalogReadPermission", "BasketFullPermission", "OcelotFullPermission", "CommentFullPermission", "PaymentFullPermission", "ImageFullPermission",
+            IdentityServerConstants.LocalApi.ScopeName,
+            IdentityServerConstants.StandardScopes.Email,
+            IdentityServerConstants.StandardScopes.OpenId,
+            IdentityServerConstants.StandardScopes.Profile}
         },
         //Admin
         new Client
@@ -76,7 +100,7 @@ public static class Config
             ClientName ="Multi Shop Admin User",
             AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
              ClientSecrets={new Secret("multishopsecret".Sha256())},
-            AllowedScopes={ "CatalogFullPermission", "CatalogReadPermission", "DiscountFullPermission", "OrderFullPermission","CargoFullPermission","BasketFullPermission",
+            AllowedScopes={ "CatalogFullPermission", "CatalogReadPermission", "DiscountFullPermission", "OrderFullPermission","CargoFullPermission","BasketFullPermission","OcelotFullPermission","CommentFullPermission","PaymentFullPermission","ImageFullPermission",
             IdentityServerConstants.LocalApi.ScopeName,
             IdentityServerConstants.StandardScopes.Email,
             IdentityServerConstants.StandardScopes.OpenId,
