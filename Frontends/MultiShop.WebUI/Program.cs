@@ -1,68 +1,100 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using MultiShop.WebUI.Services;
+using MultiShop.WebUI.Handlers;
+using MultiShop.WebUI.Services.CatalogServices.CategoryService;
 using MultiShop.WebUI.Services.Concrete;
 using MultiShop.WebUI.Services.Interfaces;
 using MultiShop.WebUI.Settings;
+using Duende.AccessTokenManagement;
 
 var builder = WebApplication.CreateBuilder(args);
 
 
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddCookie(JwtBearerDefaults.AuthenticationScheme, opt =>
+builder.Services.AddAuthentication(options =>
 {
-    opt.LoginPath = "/Login/Index/";
-    opt.LogoutPath = "/Login/LogOut/";
-    opt.AccessDeniedPath = "/Pages/AccessDenied";
-    opt.Cookie.HttpOnly = true;
-    opt.Cookie.SameSite = SameSiteMode.Strict;
-    opt.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
-    opt.Cookie.Name = "MultiShopJwt";
-});
-
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
     .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, opt =>
-{
-    opt.LoginPath = "/Login/Index/";
-    opt.ExpireTimeSpan = TimeSpan.FromDays(5);
-    opt.Cookie.Name = "MultiShopCookie";
-    opt.SlidingExpiration = true;
-
-});
-
+    {
+        opt.LoginPath = "/Login/Index/";
+        opt.LogoutPath = "/Login/LogOut/";
+        opt.AccessDeniedPath = "/Pages/AccessDenied";
+        opt.Cookie.HttpOnly = true;
+        opt.Cookie.SameSite = SameSiteMode.Strict;
+        opt.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
+        opt.Cookie.Name = "MultiShopCookie";
+        opt.ExpireTimeSpan = TimeSpan.FromDays(5);
+        opt.SlidingExpiration = true;
+    })
+    .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, opt =>
+    {
+        opt.Authority = builder.Configuration["ServiceApiSettings:IdentityServerUrl"];
+        opt.Audience = builder.Configuration["ServiceApiSettings:ApiName"];
+        opt.RequireHttpsMetadata = false;
+        opt.SaveToken = true;
+    });
 
 builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddScoped<ILoginService, LoginService>();
+builder.Services.AddScoped<IIdentityService, IdentityService>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
 
-builder.Services.AddHttpClient<IIdentityService,IdentityService>();
+builder.Services.AddScoped<ResourceOwnerPasswordTokenHandler>();
+builder.Services.AddScoped<ClientCredentialTokenHandler>();
 
-// Add services to the container.
 
-builder.Services.AddControllersWithViews();
+//builder.Services.AddAccessTokenManagement();
 
+//builder.Services.AddScoped<IClientCredentialTokenService, ClientCredentialTokenService>();
+
+builder.Services.AddHttpClient<IClientCredentialTokenService, ClientCredentialTokenService>();
+
+var values = builder.Configuration.GetSection("ServiceApiSettings").Get<ServiceApiSettings>();
+
+
+builder.Services.AddHttpClient<IUserService, UserService>(opt =>
+{
+    opt.BaseAddress = new Uri(values.IdentityServerUrl);
+}).AddHttpMessageHandler<ResourceOwnerPasswordTokenHandler>();
+
+
+
+//builder.Services.AddHttpClient<ICategoryService, CategoryService>(opt =>
+//{
+//    opt.BaseAddress = new Uri($"{values.OcelotUrl}/{values.Catalog.Path}");
+//}).AddHttpMessageHandler<ClientCredentialTokenHandler>();
+
+
+builder.Services.AddHttpClient<ICategoryService, CategoryService>(opt =>
+{
+    opt.BaseAddress = new Uri($"{values.OcelotUrl}/{values.Catalog.Path}/");
+}).AddHttpMessageHandler<ClientCredentialTokenHandler>();
+
+builder.Services.AddHttpClient();
 
 builder.Services.Configure<ClientSettings>(builder.Configuration.GetSection("ClientSettings"));
 builder.Services.Configure<ServiceApiSettings>(builder.Configuration.GetSection("ServiceApiSettings"));
 
-builder.Services.AddHttpClient();
+
+builder.Services.AddControllersWithViews();
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
 app.UseHttpsRedirection();
-
-app.UseStaticFiles(); // Statik dosyalarý sunmak için
-
+app.UseStaticFiles();
 app.UseRouting();
 
-app.UseAuthentication(); // Kimlik doðrulama middleware
-app.UseAuthorization();  // Yetkilendirme middleware
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "areas",
