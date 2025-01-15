@@ -15,7 +15,6 @@ namespace MultiShop.WebUI.Services.CatalogServices.CategoryService
         {
             await _httpClient.PostAsJsonAsync<CreateCategoryDto>("categories", categoryDto);
 
-
         }
 
         public async Task DeleteCategoryAsync(string id)
@@ -30,10 +29,10 @@ namespace MultiShop.WebUI.Services.CatalogServices.CategoryService
             return values;
         }
 
-        public async Task<GetByIdCategoryDto> GetByIdCategoryAsync(string id)
+        public async Task<UpdateCategoryDto> GetByIdCategoryAsync(string id)
         {
             var responseMessage = await _httpClient.GetAsync("categories/" + id);
-            var values = await responseMessage.Content.ReadFromJsonAsync<GetByIdCategoryDto>();
+            var values = await responseMessage.Content.ReadFromJsonAsync<UpdateCategoryDto>();
             return values;
         }
 

@@ -16,8 +16,8 @@ namespace MultiShop.WebUI.Handlers
 
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
-            //Buradaki requestte bir sorun var. burası düzeltilecek.
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", await _clientCredentialTokenService.GetTokenAsync());
+
 
             var response = await base.SendAsync(request, cancellationToken);
             if(response.StatusCode == HttpStatusCode.Unauthorized)
