@@ -44,6 +44,7 @@ public static class Config
         {
             Scopes={ "ImageFullPermission" }
         },
+   
         new ApiResource(IdentityServerConstants.LocalApi.ScopeName)
     };
     public static IEnumerable<IdentityResource> IdentityResources => new IdentityResource[]
@@ -77,7 +78,7 @@ public static class Config
             ClientName="Multi Shop Visitor User",
             AllowedGrantTypes=GrantTypes.ClientCredentials,
             ClientSecrets={new Secret("multishopsecret".Sha256())},
-            AllowedScopes ={ "CatalogFullPermission", "CatalogReadPermission", "CargoFullPermission", "OcelotFullPermission", "CommentFullPermission", "ImageFullPermission" }
+            AllowedScopes ={ "CatalogFullPermission", "CatalogReadPermission", "CargoFullPermission", "OcelotFullPermission", "CommentFullPermission", "CommentFullPermission", "ImageFullPermission" , "CommentFullPermission" }
         },
 
         //Manager
