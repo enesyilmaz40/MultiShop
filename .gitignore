@@ -363,8 +363,4 @@ MigrationBackup/
 FodyWeavers.xsd
 
 
-# C#  true
-*.cs linguist-language=C#
 
-# HTML false
-*.html linguist-detectable=false
