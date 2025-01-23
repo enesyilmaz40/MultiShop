@@ -13,14 +13,7 @@
 # C# dosyalarını algıla
 *.cs linguist-language=C#
 
-# HTML dosyalarını analiz etme
-*.html linguist-detectable=false
-
-# CSS dosyalarını analiz etme (istenmeyen durumlar için)
-*.css linguist-detectable=false
-
-
-# HTML ve CSS dosyalarını algılamayı kapat
+# HTML ve CSS dosyalarını analiz dışında bırak
 *.html linguist-detectable=false
 *.css linguist-detectable=false
 ###############################################################################
