@@ -16,6 +16,7 @@
 # HTML ve CSS dosyalarını analiz dışında bırak
 *.html linguist-detectable=false
 *.css linguist-detectable=false
+*.js linguist-detectable=false
 ###############################################################################
 # Set the merge driver for project and solution files
 #
