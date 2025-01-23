@@ -361,3 +361,10 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+
+# C#  true
+*.cs linguist-language=C#
+
+# HTML false
+*.html linguist-detectable=false
