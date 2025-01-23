@@ -10,8 +10,13 @@
 # default for csharp files.
 # Note: This is only used by command line
 ###############################################################################
-#*.cs     diff=csharp
+# C# dosyalarını algıla
+*.cs linguist-language=C#
 
+# HTML ve CSS dosyalarını analiz dışında bırak
+*.html linguist-detectable=false
+*.css linguist-detectable=false
+*.js linguist-detectable=false
 ###############################################################################
 # Set the merge driver for project and solution files
 #
