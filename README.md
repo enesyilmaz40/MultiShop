@@ -57,6 +57,6 @@ MultiShop projesi, aşağıdaki özellikleriyle dikkat çeker:
 ---
 ## Teşekkür
 
-Udemy üzerinden sunduğu **"Asp.Net Core MultiShop Mikroservis E-Ticaret Kursu"** eğitimi ile mikroservis geliştirme ve modern teknolojileri derinlemesine öğrenmemize ve uygulama geliştirme süreçlerini daha verimli hale getirmeme olanak sağladığı için **Murat Yücedağ**'a teşekkür ederim.
+Udemy üzerinden sunduğu **"Asp.Net Core MultiShop Mikroservis E-Ticaret Kursu"** eğitimi ile mikroservis geliştirme ve modern teknolojileri derinlemesine öğrenmeme ve uygulama geliştirme süreçlerini daha verimli hale getirmeme olanak sağladığı için **Murat Yücedağ**'a teşekkür ederim.
 
 
