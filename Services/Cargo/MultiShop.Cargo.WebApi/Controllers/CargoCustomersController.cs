@@ -54,6 +54,12 @@ namespace MultiShop.Cargo.WebApi.Controllers
             _cargoCustomerService.TUpdate(value);
             return Ok("Kargo Müşteri Güncelleme İşlemi Başarıyla Yapıldı.");
         }
+        [HttpGet("GetCargoCustomerById")]
+        public async Task<IActionResult> GetCargoCustomerById(string id)
+        {
+            return Ok(_cargoCustomerService.TGetCargoCustomerById(id));
+
+        }
 
     }
 }

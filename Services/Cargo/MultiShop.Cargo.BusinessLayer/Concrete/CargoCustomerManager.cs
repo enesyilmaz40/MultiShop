@@ -18,6 +18,11 @@ namespace MultiShop.Cargo.BusinessLayer.Concrete
             _cargoCustomerDal = cargoCustomerDal;
         }
 
+        public CargoCustomer TGetCargoCustomerById(string id)
+        {
+           return _cargoCustomerDal.GetCargoCustomerById(id);
+        }
+
         public void TDelete(int id)
         {
             _cargoCustomerDal.Delete(id);
@@ -35,7 +40,7 @@ namespace MultiShop.Cargo.BusinessLayer.Concrete
 
         public void TInsert(CargoCustomer entity)
         {
-           _cargoCustomerDal.Insert(entity);
+            _cargoCustomerDal.Insert(entity);
         }
 
         public void TUpdate(CargoCustomer entity)
